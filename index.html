@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Frijole|Open+Sans|Oswald&display=swap" rel="stylesheet">
     <!-- Normalize browser styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
     <!-- Link to app.js with defer till HTML render -->
     <script defer src="app.js"></script>
@@ -25,8 +26,10 @@
             <p>Name:</p>
             <input id="name" class="form-field__full" type="name" name="name">
             <p>Height</p>
+			<div class="edit">
             <label>Feet: <input id="feet" class="form-field__short" type="number" name="feet"></label>
             <label>inches: <input id="inches" class="form-field__short" type="number" name="inches"></label>
+			</div>
             <p>Weight:</p>
             <label><input id="weight" class="form-field__full" type="number" name="weight">lbs</label>
             <p>Diet:</p>
@@ -36,9 +39,18 @@
                 <option>Carnivor</option>
             </select>
             <div id="btn">Compare Me!</div>
+			<span class="footprint"></span>
+			<span class="footprintTwo"></span>
+			<span class="footprintThree"></span>
+			<span class="footprintFour"></span>
+			<span class="footprintFive"></span>
+			
         </div>
     </form>
     <!-- .grid to attach tiles to -->
+	<div class="box">
+	
+	</div>
     <main id="grid">
 
 	</main>
@@ -46,5 +58,11 @@
         <!-- Include information source -->
         <p class="fine-print">Data Sourced from <a href="https://www.wikipedia.org/">Wikipedia.org</a>, all numbers are approximations.</p>
     </footer>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/easing/EasePack.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TimelineMax.min.js"></script>
+<script src="animation.js"></script>
 </body>
 </html>
