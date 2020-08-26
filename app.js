@@ -29,8 +29,9 @@ class dinosaur {
 		  array.sort(() => Math.random() - 0.5);
 		  return array;
 		}
+	}
 		//Compare 1 - only other way could be to put in onclick and run functions in forEach loop to return new array
-		this.weightCompare = function() {
+		weightCompare() {
 			if (this.weight > humanObject.weight) {
 				let diff = this.weight - humanObject.weight;
 				return `I am ${diff}lbs heavier than you!`;
@@ -39,8 +40,9 @@ class dinosaur {
 				return `You are ${diff}lbs heavier than me!`;
 			}
 		}
+		
 		//Compare 2
-		this.dietCompare = function() {
+		dietCompare() {
 			if( this.diet == humanObject.diet ) {
 				//Used var? Change this?
 				if(this.diet == "Herbavor") { var food = "plant-based foods" } else { var food = "meat-based foods" }
@@ -52,7 +54,7 @@ class dinosaur {
 			console.log(humanObject.diet);			
 		}
 		//Compare 3
-		this.heightCompare = function() {
+		heightCompare() {
 				let humanHeight = humanObject.height * 12;
 				let humanInches = humanObject.inches * 1;
 				let humanFullHeight = humanHeight += humanInches;
@@ -64,7 +66,6 @@ class dinosaur {
 					return `You are ${heightDif} inches taller than me!`
 				}	
 		}		
-	}		
 }
 //Instantiate Dino Objects
 let dinoOne = new dinosaur("Triceratops", 13000, 114, "Herbavor")
@@ -222,6 +223,7 @@ btn.onclick = function() {
 	`<span class="padding"> You are 100% human! </span>
 	<span class="padding"> Name : ${humanObject.name} </span>
 	`
+	//Validation
 	})()} else {
 	const alert = document.createElement("div");
 	const main = document.querySelector(".box");
@@ -230,8 +232,10 @@ btn.onclick = function() {
 	grid.style.display = "none";
 	alert.innerHTML = "Please enter all fields before submitting.";
 	main.appendChild(alert);
-
-	console.log("wtf");
+	//Set timeout to refresh page
+	setTimeout((function() {
+		window.location.reload()
+	}), 3000);
 }};
 
 
