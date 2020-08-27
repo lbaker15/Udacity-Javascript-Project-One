@@ -7,6 +7,10 @@ body {
     min-height: 100vh;
 }
 
+#output {
+	font-size: 10px;
+}
+
 .padding {
 	padding: 15px 50px 10px 50px;
 	display: block;

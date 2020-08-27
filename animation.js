@@ -44,6 +44,5 @@ function validateLength(field) {
 		field.style.background = 'rgba(0, 177, 106, 0.25)';
 		} else {
 		field.style.background = 'rgba(255, 0, 0, 0.2)';
-		console.log("fired");
 		}
 }

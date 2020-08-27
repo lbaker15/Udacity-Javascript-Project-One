@@ -1,34 +1,11 @@
-//Create variables to pull in information from form 
-const name = document.getElementById("name");
-const height = document.getElementById("feet");
-const inches = document.getElementById("inches");
-const weight = document.getElementById("weight");
-const diet = document.getElementById("diet");	
-let btn = document.getElementById("btn");
-
-class human {
-	constructor(name, height, inches, weight, diet) {
-		this.name = name;
-		this.height = height;
-		this.inches = inches;
-		this.weight = weight;
-		this.diet = diet;			
-	}
-}
-//Instantiate human object 
-let humanObject = new human(name.value, height.value, inches.value, weight.value, diet.value);
-
 class dinosaur {
 	// Create Dino Constructor
-	constructor(species, weight, height, diet, array) {
+	constructor(species, weight, height, diet, img, array) {
 		this.species = species;
 		this.weight = weight;
 		this.height = height;
 		this.diet = diet;
-		this.fact = function(array) {
-		  array.sort(() => Math.random() - 0.5);
-		  return array;
-		}
+		this.img = img;
 	}
 		//Compare 1 - only other way could be to put in onclick and run functions in forEach loop to return new array
 		weightCompare() {
@@ -51,31 +28,81 @@ class dinosaur {
 				if(this.diet == "Herbavor") { var food = "plant-based foods" } else { var food = "meat-based foods" }
 				return `I do not have the same diet as you.  I prefer eating ${food}.`
 			}		
-			console.log(humanObject.diet);			
 		}
+		
 		//Compare 3
 		heightCompare() {
-				let humanHeight = humanObject.height * 12;
-				let humanInches = humanObject.inches * 1;
-				let humanFullHeight = humanHeight += humanInches;
-				if(this.height > humanHeight) {
-					let heightDif = this.height - humanHeight;
+				if(this.height > humanFullHeight) {
+					let heightDif = this.height - humanFullHeight;
 					return `I am ${heightDif} inches taller than you!`
-				} else {
-					let heightDif = humanHeight - this.height;
+				} if(this.height < humanFullHeight) {
+					let heightDif = humanFullHeight - this.height;
 					return `You are ${heightDif} inches taller than me!`
 				}	
 		}		
 }
-//Instantiate Dino Objects
-let dinoOne = new dinosaur("Triceratops", 13000, 114, "Herbavor")
-let dinoTwo = new dinosaur("Tyrannosaurus Rex", 11905, 144, "carnivor")
-let dinoThree = new dinosaur("Anklyosaurus", 10500, 55, "Herbavor")
-let dinoFour = new dinosaur("Brachiosaurus", 7000, 372, "Herbavor")
-let dinoFive = new dinosaur("Stegosaurus", 11600, 79, "Herbavor")
-let dinoSix = new dinosaur("Elasmosaurus", 16000, 59, "carnivor")
-let dinoSeven = new dinosaur("Pteranodon", 44, 20, "carnivor")
-let dinoEight = new dinosaur("Pigeon", 0.5, 9, "Herbavor", "All birds are living dinosaurs.")
+
+dinosaur.prototype.fact = function(array) {
+		  array.sort(() => Math.random() - 0.5);
+		  return array;
+	}
+
+
+
+//Btn variable
+let btn = document.getElementById("btn");
+//Responsive form human object IIFE
+const name = document.querySelector('#name');
+let nameValue = ''
+const height = document.querySelector("#feet");
+const inches = document.querySelector("#inches");
+let humanFullHeight = ''
+const weight = document.querySelector("#weight");
+let weightValue = ''
+const diet = document.getElementById("diet");	
+let dietValue = 'Herbavor'
+function eventListeners() {
+	name.addEventListener('blur', updateField);
+	name.addEventListener('blur', create);
+	height.addEventListener('blur', updateFieldTwo);
+	height.addEventListener('blur', create);
+	inches.addEventListener('blur', updateFieldTwo);
+	inches.addEventListener('blur', create);
+	weight.addEventListener('blur', updateFieldThree);
+	weight.addEventListener('blur', create);
+	diet.addEventListener('blur', updateFieldFour);
+	diet.addEventListener('blur', create);
+}
+eventListeners()
+function updateField() {
+	return nameValue = name.value;
+}
+function updateFieldTwo() {
+	let feetHeight = height.value * 12;
+	let inchesHeight = inches.value * 1;
+	return humanFullHeight = feetHeight += inchesHeight;
+}
+function updateFieldThree() {
+	return weightValue = weight.value
+}
+function updateFieldFour() {
+	return dietValue = diet.value
+}
+function create() {
+	return humanObject = new dinosaur(nameValue, weightValue, humanFullHeight, dietValue, "download.png");
+}
+
+
+
+//Instantiate Dino Objects AJAX
+let dinoOne = new dinosaur("Triceratops", 13000, 114, "Herbavor", "triceratops.png")
+let dinoTwo = new dinosaur("Tyrannosaurus Rex", 11905, 144, "carnivor", "tyrannosaurus rex.png")
+let dinoThree = new dinosaur("Anklyosaurus", 10500, 55, "Herbavor", "anklyosaurus.png")
+let dinoFour = new dinosaur("Brachiosaurus", 7000, 372, "Herbavor", "brachiosaurus.png")
+let dinoFive = new dinosaur("Stegosaurus", 11600, 79, "Herbavor", "stegosaurus.png")
+let dinoSix = new dinosaur("Elasmosaurus", 16000, 59, "carnivor", "elasmosaurus.png")
+let dinoSeven = new dinosaur("Pteranodon", 44, 20, "carnivor", "pteranodon.png")
+let dinoEight = new dinosaur("Pigeon", 0.5, 9, "Herbavor", "pigeon.png")
 
 //Fact Object
 facts = [
@@ -84,151 +111,95 @@ facts = [
 	{ f: "Anklyosaurus survived for approximately 135 million years." },
 	{ f:  "An asteroid was named 9954 Brachiosaurus in 1991." },
 	{ f: "The Stegosaurus had between 17 and 22 seperate places and flat spines." },
+	{ f: "Elasmosaurus was a marine reptile first discovered in Kansas." },
+	//Update
+	{ f:  "An asteroid was named 9954 Brachiosaurus in 1991." },
+	{ f: "The Stegosaurus had between 17 and 22 seperate places and flat spines." },
 	{ f: "Elasmosaurus was a marine reptile first discovered in Kansas." }	
 ]
+pigeonFact = [{f: "All birds are living dinosaurs."}]
+
+/*
+document.querySelector('#a').addEventListener('click', loadData);
+
+function loadData() {
+	const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+	if(this.status === 200 && this.readyState === 4){
+    document.getElementById('output').innerHTML = `<span>${this.responseText}</span>`;
+    } 
+  }
+  xhr.open("GET", "https://cors-anywhere.herokuapp.com/https:/localhost/Javascript/dino.json", true);
+  xhr.send();
+}
+*/
 
 
 
 // On button click, prepare and display infographic
 btn.onclick = function() {
-    // Remove form from screen
-	const form = document.getElementById("dino-compare");
-	const grid = document.getElementById("grid");
-
-	//Remove form
-	form.style.display = "none";
-	//Appending grid
-	const gridItem = document.createElement("div");
-	gridItem.classList.add("grid-item");
-	grid.appendChild(gridItem);
-
-	const gridItemTwo = document.createElement("div");
-	gridItemTwo.classList.add("grid-item");
-	grid.appendChild(gridItemTwo);
-	
-	const gridItemThree = document.createElement("div");
-	gridItemThree.classList.add("grid-item");
-	grid.appendChild(gridItemThree);
-	
-	const gridItemFour = document.createElement("div");
-	gridItemFour.classList.add("grid-item");
-	grid.appendChild(gridItemFour);	
-	
-	const gridItemFive = document.createElement("div");
-	gridItemFive.classList.add("grid-item");
-	grid.appendChild(gridItemFive);
-	
-	const gridItemSix = document.createElement("div");
-	gridItemSix.classList.add("grid-item");
-	grid.appendChild(gridItemSix);
-	
-	const gridItemSeven = document.createElement("div");
-	gridItemSeven.classList.add("grid-item");
-	grid.appendChild(gridItemSeven);	
-	
-	const gridItemEight = document.createElement("div");
-	gridItemEight.classList.add("grid-item");
-	grid.appendChild(gridItemEight);
-	
-	const gridItemNine = document.createElement("div");
-	gridItemNine.classList.add("grid-item");
-	grid.appendChild(gridItemNine);
-	
-
-
-
-	if( name.value.length !== 0 && height.value.length !== 0 && inches.value.length !== 0 && weight.value.length !== 0 && diet.value.length !== 0 ) {
-	// Use IIFE to get human data from form	
+	//Validation statement
+	if( name.value.length !== 0 ) {
 	(function () {
 
-	//Update human object 
-	let humanObject = new human(name.value, height.value, inches.value, weight.value, diet.value);
-	console.log(humanObject);
 
 		
-	//Creating Dino Array
+	//Creating Dino Array 
 	let dinoArray = [dinoOne, dinoTwo, dinoThree, dinoFour, dinoFive, dinoSix, dinoSeven, dinoEight];
+	let dinoSlice = dinoArray.slice(0, 4)
+	let dinoSliceTwo = dinoArray.slice(4, 8)
+	dinoSlice.push(humanObject)
+	dinoSlice.push(dinoSliceTwo)
+	let dinoEnd = dinoSlice.flat()
 
-	//Filter array to check if object is dinosaur & not pigeon
-	const results = dinoArray.filter(function(results){
-		return results.species && results.fact && results.weight > 1;		
-	});	
-	//Filter array to check if object is pigeon
-	const pigeon = dinoArray.filter(function(pigeon){
-		return pigeon.weight < 1;	
-	});		
+	
+	
+	 // Remove form from screen & create grid
+	const form = document.getElementById("dino-compare");
+	const grid = document.getElementById("grid");
+	form.style.display = "none";
+	for(let i = 0; i < 9; i++) {
+		const gridItem = document.createElement("div");
+		gridItem.classList.add("grid-item");
+		//Human Template
+		if (dinoEnd[i].species == nameValue) {
+			gridItem.innerHTML = 
+	`<span class="padding"> <img src="${dinoEnd[i].img}"/> </span>
+	<span class="padding"> Species Name : ${dinoEnd[i].species} </span>  
+
+	<span class="padding"> Random fact : You are 100% human! </span>`	
+		} else if (dinoEnd[i].weight < 1 && dinoEnd[i].weight !== weightValue) {
+			gridItem.innerHTML = 
+	`<span class="padding"> <img src="${dinoEnd[i].img}"/> </span>
+	<span class="padding"> Species Name : ${dinoEnd[i].species} </span>  
+	<span class="padding"> Weight : ${dinoEnd[i].weightCompare()} </span>
+	<span class="padding"> Diet : ${dinoEnd[i].dietCompare()} </span>
+	<span class="padding"> Height : ${dinoEnd[i].heightCompare()} </span>
+	<span class="padding"> Random dino fact : ${dinoEnd[i].fact(pigeonFact)[0].f} </span>`	
+		}	
+		//Dino Template
+		else {
+		gridItem.innerHTML = 
+	`<span class="padding"> <img src="${dinoEnd[i].img}"/> </span>
+	<span class="padding"> Species Name : ${dinoEnd[i].species} </span>  
+	<span class="padding"> Weight : ${dinoEnd[i].weightCompare()} </span>
+	<span class="padding"> Diet : ${dinoEnd[i].dietCompare()} </span>
+	<span class="padding"> Height : ${dinoEnd[i].heightCompare()} </span>
+	<span class="padding"> Random dino fact : ${dinoEnd[i].fact(facts)[i].f} </span>`	
+		}	
+		grid.appendChild(gridItem);
+	}
 
 
 
-	//If dinosaur print this
-	document.querySelector(".grid-item:nth-child(1)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[0].species} </span>  
-	<span class="padding"> Weight : ${results[0].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[0].dietCompare()} </span>
-	<span class="padding"> Height : ${results[0].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[0].fact(facts)[0].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(2)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[1].species} </span>  
-	<span class="padding"> Weight : ${results[1].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[1].dietCompare()} </span>
-	<span class="padding"> Height : ${results[1].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[1].fact(facts)[1].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(3)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[2].species} </span>  
-	<span class="padding"> Weight : ${results[2].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[2].dietCompare()} </span>
-	<span class="padding"> Height : ${results[2].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[2].fact(facts)[2].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(4)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[3].species} </span>  
-	<span class="padding"> Weight : ${results[3].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[3].dietCompare()} </span>
-	<span class="padding"> Height : ${results[3].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[3].fact(facts)[3].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(6)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[4].species} </span>  
-	<span class="padding"> Weight : ${results[4].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[4].dietCompare()} </span>
-	<span class="padding"> Height : ${results[4].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[4].fact(facts)[4].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(7)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[5].species} </span>  
-	<span class="padding"> Weight : ${results[5].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[5].dietCompare()} </span>
-	<span class="padding"> Height : ${results[5].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[5].fact(facts)[5].f} </span>`
-	
-	document.querySelector(".grid-item:nth-child(8)").innerHTML = 
-	`<span class="padding"> Species Name : ${results[6].species} </span>  
-	<span class="padding"> Weight : ${results[6].weightCompare()} </span>
-	<span class="padding"> Diet : ${results[6].dietCompare()} </span>
-	<span class="padding"> Height : ${results[6].heightCompare()} </span>
-	<span class="padding"> Random dino fact : ${results[6].fact(facts)[1].f} </span>`
-	
-	//If pigeon print this
-	document.querySelector(".grid-item:nth-child(9)").innerHTML = 
-	`<span class="padding"> Name : ${pigeon[0].species} </span>  
-	<span class="padding"> Weight : ${pigeon[0].weightCompare()} </span>
-	<span class="padding"> Diet : ${pigeon[0].dietCompare()} </span>
-	<span class="padding"> Height : ${pigeon[0].heightCompare()} </span>
-	<span class="padding"> Random bird fact : All birds are considered dinosaurs! </span>`
-	
-	//If human print this
-	document.querySelector(".grid-item:nth-child(5)").innerHTML = 
-	`<span class="padding"> You are 100% human! </span>
-	<span class="padding"> Name : ${humanObject.name} </span>
-	`
 	//Validation
 	})()} else {
 	const alert = document.createElement("div");
 	const main = document.querySelector(".box");
+	const form = document.getElementById("dino-compare");
 	alert.classList.add("alert");
 	alert.style.display = "block";
+	form.style.display = "none";
 	grid.style.display = "none";
 	alert.innerHTML = "Please enter all fields before submitting.";
 	main.appendChild(alert);
