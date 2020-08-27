@@ -16,14 +16,6 @@ body {
 	display: block;
 }
 
-.padding:nth-child(1) {
-	margin-top: 20px;
-}
-
-.padding:nth-last-child(1) {
-	margin-bottom: 30px;
-}
-
 .alert {
 	height: 50%;
 	width: 50%;
