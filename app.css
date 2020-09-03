@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     background: rgb(111, 208, 224);
-    background: linear-gradient(0deg,rgb(111, 208, 224) 0%, rgb(171, 228, 167) 100%);
+    background: linear-gradient(110deg, rgba(100,19,196,1) 0%, rgba(166,108,228,1) 100%);
     font-family: 'Open Sans', sans-serif;
     text-align: center;
     min-height: 100vh;
@@ -12,8 +12,20 @@ body {
 }
 
 .padding {
-	padding: 15px 50px 10px 50px;
+	padding: 10px 50px 10px 50px;
 	display: block;
+	font-family: 'Open Sans';
+}
+
+.padding-first {
+	padding: 40px 50px 10px 50px;
+	display: block;
+}
+
+.padding-last {
+	padding: 15px 50px 50px 50px;	
+	display: block;
+	font-family: 'Open Sans';
 }
 
 .alert {
@@ -152,7 +164,7 @@ label {
     box-sizing: border-box;
     width: 100%;
 }
-
+/*
 .grid-item:nth-child(1){
     background: #009687f5;
 }
@@ -188,7 +200,7 @@ label {
 .grid-item:nth-child(9){
     background: #677bcbfa;
 }
-
+*/
 @media (min-width: 550px) {
     #grid div {
         width: calc(100% / 3);
