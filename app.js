@@ -92,35 +92,15 @@ if(this.value !== '') {
 } 
 }
 
-//Using fetch to create dinosaur objects
-let dinoArrayOne = []
-const myInit = {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    cache: 'default'
-};
-
-let myRequest = new Request("DinoOne.json", myInit);
-
-fetch(myRequest)
-.then(function(resp) {
-	return resp.json();
-})
-.then(function(data) {
-    //Fetching relevant dinosaur data
-    for (let i = 0; i < data.Dinos.length; i++) {
-    let b = data.Dinos[i].species;
-    let c = data.Dinos[i].weight;
-    let d = data.Dinos[i].height;
-    let e = data.Dinos[i].diet;
-    let f = data.Dinos[i].img;
-    let dino = new dinosaur(b, c, d, e, f);
-    dinoArrayOne.push(dino)
-    }
-});
+let dinoOne = new dinosaur("Triceratops", 13000, 114, "Herbavor", "images/triceratops.png")
+let dinoTwo = new dinosaur("Tyrannosaurus Rex", 11905, 144, "carnivor", "images/tyrannosaurus rex.png")
+let dinoThree = new dinosaur("Anklyosaurus", 10500, 55, "Herbavor", "images/anklyosaurus.png")
+let dinoFour = new dinosaur("Brachiosaurus", 7000, 372, "Herbavor", "images/brachiosaurus.png")
+let dinoFive = new dinosaur("Stegosaurus", 11600, 79, "Herbavor", "images/stegosaurus.png")
+let dinoSix = new dinosaur("Elasmosaurus", 16000, 59, "carnivor", "images/elasmosaurus.png")
+let dinoSeven = new dinosaur("Pteranodon", 44, 20, "carnivor", "images/pteranodon.png")
+let dinoEight = new dinosaur("Pigeon", 0.5, 9, "Herbavor", "images/pigeon.png")
+let dinoArrayOne = [dinoOne, dinoTwo, dinoThree, dinoFour, dinoFive, dinoSix, dinoSeven, dinoEight]
 
 //On button click, prepare and display infographic
 function appendGrid() {
