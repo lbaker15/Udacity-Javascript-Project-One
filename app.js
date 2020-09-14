@@ -147,7 +147,7 @@ function appendGrid() {
             gridItem.innerHTML =
 	`<span class="padding-first"> <img src="${dinoEnd[i].img}"/> </span>
 	<span class="padding"> Species Name : ${dinoEnd[i].species} </span>
-	<span class="padding-last"> Random fact : You are 100% human! </span>`
+	`
         } else if ([i] == 8) {
             gridItem.innerHTML =
 	`
